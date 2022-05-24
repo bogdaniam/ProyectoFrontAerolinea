@@ -15,7 +15,8 @@ header {
     display: flex;
     background-color: green;
     height: 5rem;
-    justify-content: flex-end
+    justify-content: flex-end;
+    justify-content: space-between;
 } 
 
 .navegacion {
@@ -30,4 +31,40 @@ a {
     text-decoration: none;
     color: black;
     gap: 5rem;
+}
+
+#logo {
+    width: 95px;
+    margin-left: 10px;
+
+}
+
+.contenedor {
+    background-color: goldenrod;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+.destino1, .destino2, .destino3 {
+    background-color: red;
+    height: 80rem;
+    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservar {
+    background-color: white;
+    padding: 1.5rem;
+    border-style: none;
+    border-radius: 1rem;
+    font-size: 2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    cursor: pointer;
 }
