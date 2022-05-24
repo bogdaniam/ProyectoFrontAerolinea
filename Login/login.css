@@ -46,57 +46,8 @@ a:hover {
 
 }
 
-.contenedor {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
-}
 
-.destino1, .destino2, .destino3 {
-    background-color: red;
-    height: 80rem;
-    width: 50rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.destino1 {
-    background-image: url('../Fotos/roma.jpeg');
-    background-size: cover;
-    border-radius: .5rem;
-}
-
-.destino2 {
-    background-image: url('../Fotos/atenas.jpeg');
-    background-size: cover;
-    border-radius: .5rem; 
-}
-
-.destino3 {
-    background-image: url('../Fotos/paris.jpeg');
-    background-size: cover;
-    border-radius: .5rem;  
-}
-
-.reservar {
-    background-color: #93c47d;
-    padding: 1.5rem;
-    border-style: none;
-    border-radius: 1rem;
-    font-size: 2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    text-align: center;
-    cursor: pointer;
-}
-
-
-
-
-
+/*FOOTER*/
 /* Estilos del foooter  */
 
 
