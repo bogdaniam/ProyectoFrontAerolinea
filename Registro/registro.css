@@ -82,9 +82,9 @@ header {
 }
 
 .boton {
-  background-color: orange;
+  background-color: rgb(236, 101, 44);
   font-family: 'Spartan', sans-serif;
-  color: white;
+  color: black;
   padding: 1.5rem;
   border-style: none;
   border-radius: 1rem;

@@ -82,7 +82,8 @@ a:hover {
 }
 
 .reservar {
-    background-color: #93c47d;
+    background-color: rgb(236, 101, 44);
+    color: black;
     padding: 1.5rem;
     border-style: none;
     border-radius: 1rem;
