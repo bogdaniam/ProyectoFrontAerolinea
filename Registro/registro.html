@@ -35,32 +35,32 @@
 
                 <div class="campo">
                     <label>Nombre</label>
-                    <input type="text" placeholder="Introduce tu Nombre">
+                    <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
                 </div>
 
                 <div class="campo">
                   <label>DNI</label>
-                  <input type="text" placeholder="Introduce tu DNI">
+                  <input id="DNIRegistroS" type="text" placeholder="12345678A" required pattern="^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$">
                 </div>
 
                 <div class="campo">
                   <label>Teléfono</label>
-                  <input type="tel" placeholder="Introduce tu Número">
+                  <input id="teleforegistroS" type="tel" placeholder="+34-123456678" required pattern="^\+34-\d{9}$"> 
                 </div>
 
                 <div class="campo">
                     <label>Email</label>
-                    <input type="email" placeholder="Introduce tu email">
-                </div>
-
-                <div class="campo">
-                  <label>Telefono</label>
-                  <input type="tel" placeholder="Introduce tu Número">
+                    <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
                 </div>
 
                 <div class="campo">
                     <label>Contraseña</label>
-                    <input type="password" placeholder="Introduce tu Contraseña">
+<!--               password must contain 1 number (0-9)
+                    password must contain 1 uppercase letters
+                    password must contain 1 lowercase letters
+                    password must contain 1 non-alpha numeric number
+                    password is 8-16 characters with no space -->
+                    <input id="paswwordRegistroS" type="password" placeholder="Introduce tu Contraseña" required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
                 </div>
 
 
@@ -68,10 +68,10 @@
             </div>
 
             <div class="enviar">
-                <input class="boton" type="submit" value="Enviar">
+              <button class="boton" id="boton">Enviar</button>
             </div> 
-          
-        </form>
+          </form>
+      </form>
 
     </main>
 
