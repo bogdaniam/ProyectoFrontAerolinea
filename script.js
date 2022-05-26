@@ -36,17 +36,13 @@ function IniciarSesionM() {
             encontradoM = true;
             contadorWhileM = 0;
             console.log("Email encontrado")
-        }  else {
-            console.log("Usuario no registrado")
-        } 
+        }
         contadorWhileM++;
     }   
-
-
-    /*
+    
     if(!encontradoM) {
         console.log("Usuario no registrado")
-    }*/
+    }
 }
 
 
