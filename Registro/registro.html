@@ -22,13 +22,12 @@
       </div>
     <nav class="navegacion">
 
+
       <a href="../Login/login.html">Iniciar Sesión</a>
       <a href="../Registro/registro.html">Registro</a>
       <a href="../Contacto/contacto.html">Contacto</a>
-
-
-
     </nav>
+
   </header>
 
   <main>
@@ -39,10 +38,38 @@
 
         <div class="contenedor-campos">
 
-          <div class="campo">
-            <label>Nombre</label>
-            <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
-          </div>
+  
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
+                </div>
+
+                <div class="campo">
+                  <label>DNI</label>
+                  <input id="DNIRegistroS" type="text" placeholder="12345678A" required pattern="^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$">
+                </div>
+
+                <div class="campo">
+                  <label>Teléfono</label>
+                  <input id="teleforegistroS" type="tel" placeholder="+34-123456678" required pattern="^\+34-\d{9}$"> 
+                </div>
+
+                <div class="campo">
+                    <label>Email</label>
+                    <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
+                </div>
+
+                <div class="campo">
+                    <label>Contraseña</label>
+<!--                password must contain 1 number (0-9)
+                    password must contain 1 uppercase letters
+                    password must contain 1 lowercase letters
+                    password must contain 1 non-alpha numeric number
+                    password is 8-16 characters with no space -->
+                    <input id="paswwordRegistroS" type="password" placeholder="1Aa-Pepe" required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
+                </div>
+
+
 
           <div class="campo">
             <label>DNI</label>
@@ -54,14 +81,10 @@
             <input id="teleforegistroS" type="tel" placeholder="Introduce tu Número ej. +34-123456789" required pattern="^+34-\d{9}$">
           </div>
 
+
           <div class="campo">
             <label>Email</label>
             <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
-          </div>
-
-          <div class="campo">
-            <label>Contraseña</label>
-            <input id="paswwordRegistroS" type="password" placeholder="Introduce tu Contraseña">
           </div>
 
 
