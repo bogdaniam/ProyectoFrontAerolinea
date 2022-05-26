@@ -46,66 +46,68 @@ a:hover {
 
 }
 
-.ciudades {
-  display: grid;
-  grid-template-columns:  1fr 1fr 1fr;
-  place-items: center;
+main {
+    height: 100vh;
 }
 
-.contenedor {
-    height: 90vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    place-items: center;
+label {
+    font-size: 3rem;
 }
 
-.destino1, .destino2, .destino3 {
-    background-color: red;
-    height: 80rem;
-    width: 50rem;
+.ciudad, .fecha, .elegir {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin-top: 10rem;
+    gap: 2rem;
 }
-
-.destino1 {
-    background-image: url('../Fotos/roma.jpeg');
-    background-size: cover;
+.ciudad input {
+    display: inline-block;
+    padding: 1rem;
     border-radius: .5rem;
 }
 
-.destino2 {
-    background-image: url('../Fotos/atenas.jpeg');
-    background-size: cover;
-    border-radius: .5rem; 
+.fecha, .elegir {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+    gap: 5rem;
 }
 
-.destino3 {
-    background-image: url('../Fotos/paris.jpeg');
-    background-size: cover;
-    border-radius: .5rem;  
+.avion {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 5rem;
+    
 }
 
-.botones {
-  display: grid;
-  grid-template-columns:  1fr 1fr 1fr;
-  place-items: center;
-  padding-top: 10px;
+.asientos {
+    margin-bottom: 2rem;
 }
-.reservar {
-    background-color: rgb(236, 101, 44);
-    color: black;
-    padding: 1.5rem;
-    border-style: none;
-    border-radius: 1rem;
-    font-size: 2rem;
-    text-decoration: none;
-    text-transform: uppercase;
-    position: relative;
-    text-align: center;
-    cursor: pointer;
+
+button {
+    width: 5rem; 
+    background-color: #93c47d;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -194,4 +196,3 @@ a:hover {
     margin-bottom: 20px;
     font-size: 25px;
   }
-  
