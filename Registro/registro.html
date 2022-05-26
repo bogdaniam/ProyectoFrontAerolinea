@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="../Fotos/logo.png">
   <title>Europa Air</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Righteous&family=Space+Mono&family=Titan+One&display=swap" rel="stylesheet">
+  <link href="./login.css" rel="stylesheet">
   <link href="./registro.css" rel="stylesheet">
 </head>
 
@@ -16,10 +20,10 @@
 
   <header>
     <div class="logo">
-        <a href="../LandingPage/landingPage.html">
+      <a href="../LandingPage/landingPage.html">
         <img id="logo" src="../Fotos/logo.png" alt="">
       </a>
-      </div>
+    </div>
     <nav class="navegacion">
 
 
@@ -33,69 +37,51 @@
   <main>
 
     <div class="formulario">
-      
-        <legend>REGISTRO</legend>
 
-        <div class="contenedor-campos">
+      <legend>REGISTRO</legend>
 
-  
-                <div class="campo">
-                    <label>Nombre</label>
-                    <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
-                </div>
+      <div class="contenedor-campos">
 
-                <div class="campo">
-                  <label>DNI</label>
-                  <input id="DNIRegistroS" type="text" placeholder="12345678A" required pattern="^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$">
-                </div>
 
-                <div class="campo">
-                  <label>Teléfono</label>
-                  <input id="teleforegistroS" type="tel" placeholder="+34-123456678" required pattern="^\+34-\d{9}$"> 
-                </div>
+        <div class="campo">
+          <label>Nombre</label>
+          <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
+        </div>
 
-                <div class="campo">
-                    <label>Email</label>
-                    <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
-                </div>
+        <div class="campo">
+          <label>DNI</label>
+          <input id="DNIRegistroS" type="text" placeholder="Introduce tu DNI ej. 12345678A" required
+            pattern="^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$">
+        </div>
 
-                <div class="campo">
-                    <label>Contraseña</label>
-<!--                password must contain 1 number (0-9)
+        <div class="campo">
+          <label>Teléfono</label>
+          <input id="teleforegistroS" type="tel" placeholder="Introduce tu Número ej. +34-123456789" required
+            pattern="^+34-\d{9}$">
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Email</label>
+        <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
+      </div>
+
+      <div class="campo">
+        <label>Contraseña</label>
+        <!--                password must contain 1 number (0-9)
                     password must contain 1 uppercase letters
                     password must contain 1 lowercase letters
                     password must contain 1 non-alpha numeric number
                     password is 8-16 characters with no space -->
-                    <input id="paswwordRegistroS" type="password" placeholder="1Aa-Pepe" required pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
-                </div>
-
-
-
-          <div class="campo">
-            <label>DNI</label>
-            <input id="DNIRegistroS" type="text" placeholder="Introduce tu DNI ej. 12345678A" required pattern="^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$">
-          </div>
-
-          <div class="campo">
-            <label>Teléfono</label>
-            <input id="teleforegistroS" type="tel" placeholder="Introduce tu Número ej. +34-123456789" required pattern="^+34-\d{9}$">
-          </div>
-
-
-          <div class="campo">
-            <label>Email</label>
-            <input id="emailRegistroS" type="email" placeholder="Introduce tu email">
-          </div>
-
-
-
-        </div>
-
-        <div class="enviar">
-          <button class="boton" onclick="guardarM();" type="submit" value="Enviar">Registrar</button>
-        </div>
-
+        <input id="paswwordRegistroS" type="password" placeholder="1Aa-Pepe" required
+          pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
       </div>
+
+      <div class="enviar">
+        <button class="boton" onclick="guardarM();" type="submit" value="Enviar">Registrar</button>
+      </div>
+
+    </div>
 
   </main>
 

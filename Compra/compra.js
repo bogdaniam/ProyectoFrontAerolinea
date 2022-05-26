@@ -1,3 +1,4 @@
+
 const asientos = [];
 function colorear(boton) {
 
