@@ -1,5 +1,18 @@
-//guardar contador en local storage
 
+window.onload = () => {
+    var user = JSON.parse(localStorage.getItem('sesionLogin'));
+    var test = JSON.parse(localStorage.getItem('user_2'))
+    if(user){
+        document.getElementById('navSinLoginD').style.display = "none";
+        document.getElementById('navConLoginD').style.display = "inline"
+        document.getElementById('nameD').innerHTML = `Bienvenido ${test.nombre}`
+    } else {
+        document.getElementById('navSinLoginD').style.display = "inline";
+        document.getElementById('navConLoginD').style.display = "none"
+    }
+}
+
+//guardar contador en local storage
 let contadorM = 0;
 function guardarM() {
     let email = document.getElementById("emailRegistroS").value;
@@ -30,6 +43,8 @@ function IniciarSesionM() {
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
             if((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM ) {
                 console.log("contraseña ok")
+                localStorage.setItem('sesionLogin', 'true')
+                window.location.assign("http://127.0.0.1:5500/ProyectoFrontAerolinea/Compra/compra.html")
             } else {
                 console.log("contrasena invalida")
             }
@@ -43,6 +58,10 @@ function IniciarSesionM() {
     if(!encontradoM) {
         console.log("Usuario no registrado")
     }
+}
+
+function desconectarD (){
+    localStorage.setItem('sesionLogin', 'false')
 }
 
 
