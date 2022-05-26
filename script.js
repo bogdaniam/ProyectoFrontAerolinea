@@ -30,6 +30,7 @@ function IniciarSesionM() {
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
             if((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM ) {
                 console.log("contraseña ok")
+                window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
             } else {
                 console.log("contrasena invalida")
             }
@@ -44,5 +45,7 @@ function IniciarSesionM() {
         console.log("Usuario no registrado")
     }
 }
+
+
 
 
