@@ -7,6 +7,7 @@ html {
   *:before,
   *:after {
     box-sizing: inherit;
+    font-family: 'Orbitron', sans-serif;
   }
   
   body {
@@ -15,11 +16,15 @@ html {
   
   header {
     display: flex;
-    background-color: #93c47d;
+    background-color:  #60e550;
     height: 6rem;
     justify-content: flex-end;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    border-radius: 0.5rem;
+    border: solid 3px black;
+
+
   }
   
   .navegacion {
@@ -39,7 +44,6 @@ html {
   
   a:hover {
     color: white;
-    text-decoration: underline;
   }
   
   #logo {
@@ -50,23 +54,28 @@ html {
 
   .cajaGraciasD{ 
     display: flex;
-    background-color: #93c47d;
+    background-color:  #60e550;
     width: min(90rem, 100%);
     margin: auto;
     margin-top: 10rem;
     padding: 5%;
     border-radius: 3rem;
     font-size: 25px;
+    box-shadow: 0px 0px 35px 5px rgba(255, 87, 0, 0.64);
+    border: solid 3px black;
+
+
 }
-  
+
+
   /*FOOTER*/
   /* Estilos del foooter  */
   
   
   .footer-distributed {
     display: flex;
-    margin-top: 10rem;
-    background-color: #93c47d;
+    margin-top: 26rem;
+    background-color:  #60e550;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
@@ -76,6 +85,10 @@ html {
     z-index: 0;
     align-items: center;
     justify-content: center;
+    border-radius: 0.5rem;
+    border: solid 3px black;
+
+
   }
   
   
