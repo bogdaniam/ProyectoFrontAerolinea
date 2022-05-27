@@ -1,30 +1,34 @@
-
 window.onload = () => {
     var log = JSON.parse(localStorage.sesionLogin).login;
     console.log(JSON.parse(localStorage.sesionLogin).user)
-    
+
 
     if(log){
-        let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        let UsuarioLogeado = (JSON.parse(localStorage[${JSON.parse(localStorage.sesionLogin).user}]))
+        document.getElementById("historialS").style.display = "block"
         document.getElementById("nameD").style.display = "block";
         document.getElementById("disconnectD").style.display = "block";
         document.getElementById("connectD").style.display = "none"
         document.getElementById("registerD").style.display = "none"
         document.getElementById("contactD").style.display = "none"
-        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
+        document.getElementById('nameD').innerHTML = Bienvenido ${UsuarioLogeado.nombre}
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
         document.getElementById("connectD").style.display = "block"
         document.getElementById("registerD").style.display = "block"
         document.getElementById("contactD").style.display = "block"
-
-
+        document.getElementById("historialS").style.display = "none"
         //document.getElementById('navSinLoginD').style.visibility = "visible";
         //document.getElementById('navConLoginD').style.visibility = "hidden"
+
     }
-    
+
 }
+        
+    
+    
+
 
 //guardar contador en local storage
 let contadorM = 0;
@@ -63,7 +67,22 @@ function IniciarSesionM() {
                     
                 }) )
                 
-                window.location.assign("http://127.0.0.1:5500/Compra/compra.html")
+
+                setTimeout(function() {
+
+                    window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
+                }, 3.0*1000); 
+
+
+                //todavia no funciona
+                document.getElementsByClassName('contenedor-campos').style.display = 'none';
+                
+
+                
+
+
+
+
             } else {
                 console.log("contrasena invalida")
             }

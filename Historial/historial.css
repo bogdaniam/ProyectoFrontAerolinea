@@ -14,13 +14,14 @@ body{
 
 header {
     display: flex;
-    background-color:  #60e550;
+    background-color: #60e550;
     height: 6rem;
     justify-content: flex-end;
     justify-content: space-between;
     align-items: center;
     border-radius: 0.5rem;
     border: solid 3px black;
+
 } 
 
 .navegacion {
@@ -45,76 +46,20 @@ a:hover {
 #logo {
     width: 95px;
     margin-left: 10px;
-
 }
 
-main {
-    height: 100vh;
+.cajaGraciasS{ 
+  display: flex;
+  background-color:  white;
+  width: min(90rem, 100%);
+  margin: auto;
+  margin-top: 10rem;
+  padding: 5%;
+  border-radius: 3rem;
+  font-size: 25px;
+  box-shadow: 0px 0px 35px 5px rgba(255, 87, 0, 0.64);
+  border: solid 3px black;
 }
-
-label {
-    font-size: 3rem;
-}
-
-.ciudad, .fecha, .elegir {
-    display: flex;
-    justify-content: center;
-    margin-top: 10rem;
-    gap: 2rem;
-}
-.ciudad input {
-    display: inline-block;
-    padding: 1rem;
-    border-radius: .5rem;
-}
-
-select {
-  width: 10rem;
-}
-
-.fecha, .elegir {
-    display: flex;
-    justify-content: center;
-    margin-top: 5rem;
-    gap: 5rem;
-}
-
-.avion {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 5rem;
-    
-}
-
-.asientos {
-    margin-bottom: 2rem;
-}
-
-button {
-    width: 5rem; 
-    background-color:  #60e550;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -124,8 +69,8 @@ button {
 
 .footer-distributed {
     display: flex;
-    margin-top: 10rem;
-    background-color:   #60e550;
+    margin-top: 25rem;
+    background-color: #60e550;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
@@ -140,21 +85,7 @@ button {
 
   }
 
-.reservaVuelo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#reservar {
-  width: 15rem;
-  padding: 1rem;
-  font-size: 2rem;
-}
-#reservar:hover {
-  color: white;
-}
-
+  
   /* Footer left */
   
   .footer-distributed .footer-left {
@@ -219,3 +150,4 @@ button {
     margin-bottom: 20px;
     font-size: 25px;
   }
+  
