@@ -1,15 +1,29 @@
 
 window.onload = () => {
-    var user = JSON.parse(localStorage.getItem('sesionLogin'));
-    var test = JSON.parse(localStorage.getItem('user_2'))
-    if(user){
-        document.getElementById('navSinLoginD').style.display = "none";
-        document.getElementById('navConLoginD').style.display = "inline"
-        document.getElementById('nameD').innerHTML = `Bienvenido ${test.nombre}`
+    var log = JSON.parse(localStorage.sesionLogin).login;
+    console.log(JSON.parse(localStorage.sesionLogin).user)
+    
+
+    if(log){
+        let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        document.getElementById("nameD").style.display = "block";
+        document.getElementById("disconnectD").style.display = "block";
+        document.getElementById("connectD").style.display = "none"
+        document.getElementById("registerD").style.display = "none"
+        document.getElementById("contactD").style.display = "none"
+        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
     } else {
-        document.getElementById('navSinLoginD').style.display = "inline";
-        document.getElementById('navConLoginD').style.display = "none"
+        document.getElementById("nameD").style.display = "none";
+        document.getElementById("disconnectD").style.display = "none";
+        document.getElementById("connectD").style.display = "block"
+        document.getElementById("registerD").style.display = "block"
+        document.getElementById("contactD").style.display = "block"
+
+
+        //document.getElementById('navSinLoginD').style.visibility = "visible";
+        //document.getElementById('navConLoginD').style.visibility = "hidden"
     }
+    
 }
 
 //guardar contador en local storage
@@ -43,8 +57,13 @@ function IniciarSesionM() {
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
             if((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM ) {
                 console.log("contraseña ok")
-                localStorage.setItem('sesionLogin', 'true')
-                window.location.assign("http://127.0.0.1:5500/ProyectoFrontAerolinea/Compra/compra.html")
+                localStorage.setItem('sesionLogin', JSON.stringify({
+                    login: true,
+                    user: `${key}`,
+                    
+                }) )
+                
+                window.location.assign("http://127.0.0.1:5500/Compra/compra.html")
             } else {
                 console.log("contrasena invalida")
             }
@@ -61,7 +80,11 @@ function IniciarSesionM() {
 }
 
 function desconectarD (){
-    localStorage.setItem('sesionLogin', 'false')
+    localStorage.setItem('sesionLogin', JSON.stringify({
+        login: false,
+        user: `desconectadoD`,
+        
+    }))
 }
 
 
