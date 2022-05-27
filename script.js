@@ -126,7 +126,7 @@ function historyM(){
             Fecha vuelta: ${busquedaHistorialM[contadorBusquedaUserM].fechaVuelta}  
             Asientos: ${busquedaHistorialM[contadorBusquedaUserM].asientos} 
             Precio: ${busquedaHistorialM[contadorBusquedaUserM].precio}`); 
-            
+            console.log(typeof texto)
             var etiqueta = document.createElement("p"); 
             
             var contenido = document.createTextNode (texto); 
