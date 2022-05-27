@@ -2,16 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="../Fotos/logo.png">
-    <title>Europa Air</title>
-    <link href="./landingPage.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Righteous&family=Space+Mono&family=Titan+One&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../Fotos/logo.png">
+  <title>Europa Air</title>
+  <link href="./landingPage.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Righteous&family=Space+Mono&family=Titan+One&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -19,15 +22,13 @@
         <img id="logo" src="../Fotos/logo.png" alt="">
       </a>
     </div>
-    <nav class="navegacion" id="navSinLoginD">
-        <a href="../Login/login.html">Iniciar Sesión</a>
-        <a href="../Registro/registro.html">Registro</a>
-        <a href="../Contacto/contacto.html">Contacto</a>
+    <nav class="navegacion">
+      <a id="connectD" href="../Login/login.html">Iniciar Sesión</a>
+      <a id="registerD" href="../Registro/registro.html">Registro</a>
+      <a id="contactD" href="../Contacto/contacto.html">Contacto</a>
+      <a href="" id="nameD">Bienvenido</a>
+      <a id="disconnectD" href="../LandingPage/landingPage.html" onclick="desconectarD();">Desconectar</a>
     </nav>
-    <nav class="navegacion" id="navConLoginD">
-      <a href="" id="nameD"></a>
-      <a href="../LandingPage/landingPage.html" onclick="desconectarD()">Desconectar</a>
-  </nav>
   </header>
   <main>
     <div class="ciudades">
@@ -46,10 +47,10 @@
       <div class="destino3">
       </div>
     </div>
-        <div class="botones">
+    <div class="botones">
 
-            <a class="reservar" href="../Compra/compra.html">Reservar</a>
-        </div>
+      <a class="reservar" href="../Compra/compra.html">Reservar</a>
+    </div>
   </main>
   <footer class="footer-distributed">
     <div class="footer-left">
