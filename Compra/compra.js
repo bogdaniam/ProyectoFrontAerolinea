@@ -120,15 +120,17 @@ origen.addEventListener("change", function () {
     let fechaVuelta = document.getElementById("vuelta");
     fechaVuelta.setAttribute("min", `${fechaIda}`); 
 });*/
-/*
-let element = document.getElementById("ida").value;
-element.addEventListener("click", myFunction);
 
-function myFunction() {
-    let fechaIda = document.getElementById("ida").value
-    let fechaVuelta = document.getElementById("vuelta");
-    fechaVuelta.setAttribute("min", `${fechaIda}`); 
-}*/
+
+
+document.getElementById("ida").addEventListener("change", ()=>{
+    function myFunction() {
+        let fechaIda = document.getElementById("ida").value
+        let fechaVuelta = document.getElementById("vuelta");
+        fechaVuelta.setAttribute("min", `${fechaIda}`); 
+    }
+    myFunction();
+});
 
 
 
@@ -167,16 +169,25 @@ let historialNewM = {
 
 
 
+    if (!localStorage.Historial){
+        localStorage.setItem('Historial', JSON.stringify([{
+            user: "",
+            origen: "",
+            destino: "",
+            fechaIda: "",
+            fechaVuelta: "",
+            asientos: "",
+            precio: "",
+        }]));
 
 
+    }
 
     let historial = JSON.parse(localStorage.getItem(`Historial`))
     historial.push(historialNewM)
-    console.log(historial)
-
-
-    localStorage.setItem('HistorialPrueba', JSON.stringify(historial));
-    
+    localStorage.setItem('Historial', JSON.stringify(historial));
+    location.reload();
+    ;
     
     
     
