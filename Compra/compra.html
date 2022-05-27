@@ -38,9 +38,17 @@
 
         <div class="ciudad">
             <label>Origen</label>
-            <input type="text" placeholder="Madrid" id="origen" required>
+            <select name="salida" id="salida">
+                <option value="Madrid">Madrid</option>
+            </select>
+
             <label>Destino</label>
-            <input type="text" placeholder="Roma, Atenas o París" id="destino" required>
+            <select name="destino" id="destino">
+                <option value="Roma">Roma</option>
+                <option value="Atenas">Atenas</option>
+                <option value="Paris">París</option>
+            </select>
+
         </div>
 
         <div class="fecha">
@@ -191,6 +199,10 @@
         </div>
 
     </main>
+
+    <div class="reservaVuelo"> 
+        <button id="reservar" onclick="compra()">Comprar</button>
+    </div>
 
 
     <footer class="footer-distributed">

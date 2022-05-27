@@ -1,22 +1,60 @@
 
 const asientos = [];
 function colorear(boton) {
+    let contLocStor = 0;
+    let encontrado = false;
 
-    if (asientos.length < 1) {
-        asientos.push(`${boton.innerHTML}`);
-        boton.style.backgroundColor = "red";
+    while ((contLocStor != asientos.length) && (!encontrado)) {
 
-        for (let i = 0; i < asientos.length; i++) {
-            if (asientos[i] == (`${boton.innerHTML}`)) {
-                asientos.splice(i, 1);
-                boton.style.backgroundColor = "green"
-                console.log("Estoy en el if del for")
-            } else {
-                console.log("Algo va mal");
-            }
+
+       if ((asientos[contLocStor] == (`${boton.innerHTML}`))) {
+            asientos.splice(contLocStor, 1);
+            boton.style.backgroundColor = "green"
+            encontrado = true;
         }
-
-        localStorage.setItem("Asientos", JSON.stringify(asientos));
-        console.log(asientos);
+        contLocStor++;
     }
+
+
+    if (!encontrado) {
+        asientos.push(`${boton.innerHTML}`)
+        boton.style.backgroundColor = "red";
+    }
+    console.log(asientos)
 }
+
+
+
+
+
+/*
+let origen = document.getElementById("ida").value;
+origen.addEventListener("change", function () {
+    let fechaIda = document.getElementById("ida").value
+    let fechaVuelta = document.getElementById("vuelta");
+    fechaVuelta.setAttribute("min", `${fechaIda}`); 
+});*/
+/*
+let element = document.getElementById("ida").value;
+element.addEventListener("click", myFunction);
+
+function myFunction() {
+    let fechaIda = document.getElementById("ida").value
+    let fechaVuelta = document.getElementById("vuelta");
+    fechaVuelta.setAttribute("min", `${fechaIda}`); 
+}*/
+
+
+
+
+function compra() {
+    let salida = document.getElementById("salida").value
+    let destino = document.getElementById("destino").value
+    //console.log(salida)
+    //console.log(destino)
+    let ida = document.getElementById("ida").value
+    let vuelta = document.getElementById("vuelta").value
+    //console.log(ida)
+    //console.log(vuelta)
+}
+
