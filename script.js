@@ -4,14 +4,14 @@ window.onload = () => {
 
 
     if(log){
-        let UsuarioLogeado = (JSON.parse(localStorage[${JSON.parse(localStorage.sesionLogin).user}]))
+        let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
         document.getElementById("historialS").style.display = "block"
         document.getElementById("nameD").style.display = "block";
         document.getElementById("disconnectD").style.display = "block";
         document.getElementById("connectD").style.display = "none"
         document.getElementById("registerD").style.display = "none"
         document.getElementById("contactD").style.display = "none"
-        document.getElementById('nameD').innerHTML = Bienvenido ${UsuarioLogeado.nombre}
+        document.getElementById('nameD').innerHTML = Bienvenido `${UsuarioLogeado.nombre}`
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
@@ -67,7 +67,7 @@ function IniciarSesionM() {
                     
                 }) )
                 
-
+                /*
                 setTimeout(function() {
 
                     window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
@@ -76,8 +76,10 @@ function IniciarSesionM() {
 
                 //todavia no funciona
                 document.getElementsByClassName('contenedor-campos').style.display = 'none';
-                
+                */
 
+                //borrar cuando funciona el codigo de arriba
+                window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
                 
 
 
