@@ -7,6 +7,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/x-icon" href="../Fotos/logo.png">
   <title>Europa Air</title>
+  <link href="./landingPage.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500&family=Righteous&family=Space+Mono&family=Titan+One&display=swap" rel="stylesheet">
   <link href="./gracias.css" rel="stylesheet">
 </head>
 
@@ -15,15 +19,15 @@
   <header>
     <div class="logo">
       <a href="../LandingPage/landingPage.html">
-      <img id="logo" src="../Fotos/logo.png" alt="">
-    </a>
+        <img id="logo" src="../Fotos/logo.png" alt="">
+      </a>
     </div>
     <nav class="navegacion">
-
-      <a href="../Login/login.html">Iniciar Sesión</a>
-      <a href="../Registro/registro.html">Registro</a>
-      <a href="../Contacto/contacto.html">Contacto</a>
-
+      <a id="connectD" href="../Login/login.html">Iniciar Sesión</a>
+      <a id="registerD" href="../Registro/registro.html">Registro</a>
+      <a id="contactD" href="../Contacto/contacto.html">Contacto</a>
+      <a href="" id="nameD">Bienvenido</a>
+      <a id="disconnectD" href="../LandingPage/landingPage.html" onclick="desconectarD();">Desconectar</a>
     </nav>
   </header>
 
