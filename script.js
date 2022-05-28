@@ -261,6 +261,13 @@ function colorear(boton) {
         asientos.push(`${boton.innerHTML}`)
         boton.style.backgroundColor = "red";
     }
+    
+    if(asientos.length > 10){
+        asientos.splice(contLocStor, 1);
+        boton.style.backgroundColor = "#60e550";
+        contLocStor--;
+
+    }
     console.log(asientos)
 }
 let asientosReservadosM = [];
