@@ -203,7 +203,7 @@ function pagar() {
     }
 
     //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
-    /*
+  /*  
     let historialNewM = {
         user: JSON.parse(localStorage.sesionLogin).user,
         origen: document.getElementById("salida").value,
@@ -212,7 +212,7 @@ function pagar() {
         fechaVuelta: document.getElementById("vuelta").value,
         asientos: asientos,
         precio: Number(80 * asientos.length),
-    };
+    };*/
 
     if (!localStorage.Historial) {
         localStorage.setItem('Historial', JSON.stringify([{
@@ -226,7 +226,7 @@ function pagar() {
         }]));
     }
 
-*/
+
     //Si se cumplen las condiciones de pago, se actualiza el Historial
     let historial = JSON.parse(localStorage.getItem(`Historial`))
     let historialNewM  = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
@@ -269,6 +269,9 @@ document.getElementById("ida").addEventListener("change", () => {
         let fechaIda = document.getElementById("ida").value
         let fechaVuelta = document.getElementById("vuelta");
         fechaVuelta.setAttribute("min", `${fechaIda}`);
+
+
+
     }
     myFunction();
 });
