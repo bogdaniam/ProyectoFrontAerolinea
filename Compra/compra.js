@@ -1,9 +1,9 @@
 window.onload = () => {
     var log = JSON.parse(localStorage.sesionLogin).login;
     console.log(JSON.parse(localStorage.sesionLogin).user)
-    
 
-    if(log){
+
+    if (log) {
         let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
         document.getElementById("nameD").style.display = "block";
         document.getElementById("disconnectD").style.display = "block";
@@ -22,7 +22,7 @@ window.onload = () => {
         //document.getElementById('navSinLoginD').style.visibility = "visible";
         //document.getElementById('navConLoginD').style.visibility = "hidden"
     }
-    
+
 }
 
 //guardar contador en local storage
@@ -54,14 +54,14 @@ function IniciarSesionM() {
         let key = localStorage.key(contadorWhileM);
 
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
-            if((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM ) {
+            if ((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM) {
                 console.log("contraseña ok")
                 localStorage.setItem('sesionLogin', JSON.stringify({
                     login: true,
                     user: `${key}`,
-                    
-                }) )
-                
+
+                }))
+
                 window.location.assign("http://127.0.0.1:5500/Compra/compra.html")
             } else {
                 console.log("contrasena invalida")
@@ -71,18 +71,18 @@ function IniciarSesionM() {
             console.log("Email encontrado")
         }
         contadorWhileM++;
-    }   
-    
-    if(!encontradoM) {
+    }
+
+    if (!encontradoM) {
         console.log("Usuario no registrado")
     }
 }
 
-function desconectarD (){
+function desconectarD() {
     localStorage.setItem('sesionLogin', JSON.stringify({
         login: false,
         user: `desconectadoD`,
-        
+
     }))
 }
 
@@ -95,7 +95,7 @@ function colorear(boton) {
     while ((contLocStor != asientos.length) && (!encontrado)) {
 
 
-       if ((asientos[contLocStor] == (`${boton.innerHTML}`))) {
+        if ((asientos[contLocStor] == (`${boton.innerHTML}`))) {
             asientos.splice(contLocStor, 1);
             boton.style.backgroundColor = "green"
             encontrado = true;
@@ -123,11 +123,11 @@ origen.addEventListener("change", function () {
 
 
 
-document.getElementById("ida").addEventListener("change", ()=>{
+document.getElementById("ida").addEventListener("change", () => {
     function myFunction() {
         let fechaIda = document.getElementById("ida").value
         let fechaVuelta = document.getElementById("vuelta");
-        fechaVuelta.setAttribute("min", `${fechaIda}`); 
+        fechaVuelta.setAttribute("min", `${fechaIda}`);
     }
     myFunction();
 });
@@ -144,32 +144,33 @@ function compra() {
     let vuelta = document.getElementById("vuelta").value
     //console.log(ida)
     //console.log(vuelta)
-/*
-    localStorage.setItem('Historial', JSON.stringify([{
+    /*
+        localStorage.setItem('Historial', JSON.stringify([{
+            user: JSON.parse(localStorage.sesionLogin).user,
+            origen: document.getElementById("salida").value,
+            destino: document.getElementById("destino").value,
+            fechaIda: document.getElementById("ida").value,
+            fechaVuelta: document.getElementById("vuelta").value,
+            asientos: asientos,
+            precio: 100,
+        }]));
+    */
+
+
+        
+    //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
+    /*
+    let historialNewM = {
         user: JSON.parse(localStorage.sesionLogin).user,
         origen: document.getElementById("salida").value,
         destino: document.getElementById("destino").value,
         fechaIda: document.getElementById("ida").value,
         fechaVuelta: document.getElementById("vuelta").value,
         asientos: asientos,
-        precio: 100,
-    }]));
-*/
+        precio: Number(80 * asientos.length),
+    };
 
-let historialNewM = {
-    user: JSON.parse(localStorage.sesionLogin).user,
-    origen: document.getElementById("salida").value,
-    destino: document.getElementById("destino").value,
-    fechaIda: document.getElementById("ida").value,
-    fechaVuelta: document.getElementById("vuelta").value,
-    asientos: asientos,
-    precio: 100,
-};
-
-
-
-
-    if (!localStorage.Historial){
+    if (!localStorage.Historial) {
         localStorage.setItem('Historial', JSON.stringify([{
             user: "",
             origen: "",
@@ -179,19 +180,35 @@ let historialNewM = {
             asientos: "",
             precio: "",
         }]));
-
-
     }
 
     let historial = JSON.parse(localStorage.getItem(`Historial`))
     historial.push(historialNewM)
     localStorage.setItem('Historial', JSON.stringify(historial));
     location.reload();
-    ;
-    
-    
-    
-    
-  
+    */
+
+
+
+    //Implementar solo en la pagina de compra
+    //Guardar los datos en una key provisiolan, para que luego la pagina de pago tenga acceso a estos datos
+
+    let historialProvisionalM = {
+        user: JSON.parse(localStorage.sesionLogin).user,
+        origen: document.getElementById("salida").value,
+        destino: document.getElementById("destino").value,
+        fechaIda: document.getElementById("ida").value,
+        fechaVuelta: document.getElementById("vuelta").value,
+        asientos: asientos,
+        precio: Number(80 * asientos.length),
+    };
+    localStorage.setItem('HistorialProvisionalM', JSON.stringify(historialProvisionalM));
+    location.reload();
+
+
+
+
+
 }
+
 

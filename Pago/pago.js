@@ -1,3 +1,14 @@
+window.onload = () => {
+
+
+document.getElementById("origenReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).origen);
+document.getElementById("destinoReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).destino);
+document.getElementById("fechaIdaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaIda);
+document.getElementById("fechaVueltaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaVuelta);
+document.getElementById("precioReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).precio);
+
+}
+
 
 function pagar () {
     const numTarjeta = document.getElementById('numeroTarjeta').value;
