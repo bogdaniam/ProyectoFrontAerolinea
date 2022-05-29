@@ -1,18 +1,49 @@
 window.onload = () => {
+
+    //si la key sesionLogin no existe, se ocultan elementos de nav
+    const sesionOnLoad = localStorage.getItem('sesionLogin');
+    if (!sesionOnLoad) {
+        console.log('sesionLogin no existe');
+        document.getElementById("nameD").style.display = "none";
+        document.getElementById("disconnectD").style.display = "none";
+        document.getElementById("connectD").style.display = "block"
+        document.getElementById("registerD").style.display = "block"
+        document.getElementById("contactD").style.display = "block"
+        document.getElementById("historialS").style.display = "none"
+    }
+
+
+
     var log = JSON.parse(localStorage.sesionLogin).login;
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
+    //console.log(log)
+
+
+
 
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
-        let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        let nombreUsuarioCompleto = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        let UsuarioLogeadoM = nombreUsuarioCompleto.nombre.split(' ')
+        console.log(UsuarioLogeadoM)
+        //let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
         document.getElementById("historialS").style.display = "block"
         document.getElementById("nameD").style.display = "block";
         document.getElementById("disconnectD").style.display = "block";
         document.getElementById("connectD").style.display = "none"
         document.getElementById("registerD").style.display = "none"
         document.getElementById("contactD").style.display = "none"
-        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
+        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeadoM[0]}`
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        let fechaIdaMinM = document.getElementById("ida");
+        fechaIdaMinM.setAttribute("min", `${today}`);
+        //document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
@@ -27,6 +58,8 @@ window.onload = () => {
 
     }
 
+
+
     //En la pagina de pago, se van a rellenar los campor origen, destino...
     document.getElementById("origenReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).origen);
     document.getElementById("destinoReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).destino);
@@ -35,6 +68,7 @@ window.onload = () => {
     document.getElementById("precioReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).precio);
 
     setTimeout(historyM, 500);
+
 
 
 }
@@ -46,18 +80,49 @@ window.onload = () => {
 
 //Nos registra los usuarios en localstorage (pagina registro)
 let contadorM = 0;  //guardar contador en localstorage
+
 function guardarM() {
-    let email = document.getElementById("emailRegistroS").value;
-    console.log(email)
-    contadorM++;
-    localStorage.setItem(`user_${contadorM}`, JSON.stringify({
-        email: document.getElementById("emailRegistroS").value,
-        password: document.getElementById("paswwordRegistroS").value,
-        nombre: document.getElementById("nombreRegistroS").value,
-        dni: document.getElementById("DNIRegistroS").value,
-        telefono: document.getElementById("teleforegistroS").value
-    }));
+
+    const nombreRegistroNameS = document.getElementById('nombreRegistroS').value;
+    const DNIRegistroS = document.getElementById('DNIRegistroS').value;
+    const telefonoRegistroS = document.getElementById('telefoRegistroS').value;
+    const emailRegistroS = document.getElementById('emailRegistroS').value;
+    const passwordRegsitroS = document.getElementById('paswwordRegistroS').value;
+
+
+    const mensajeErrorS = document.getElementById('mensajeErrorS');
+    const crearNodoS = document.createElement('h3');
+    const crearTextoS = document.createTextNode('Datos incorrectos introducir de nuevo.');
+
+
+
+    if (nombreRegistroNameS.match(/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)$/)
+        && (DNIRegistroS.match(/^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/))
+        && (telefonoRegistroS.match(/[0-9]{9}/))
+        && (emailRegistroS.match(/^[a-zA-Z0-9_\-\.~]{2,}@[a-zA-Z0-9_\-\.~]{2,}\.[a-zA-Z]{2,4}$/))
+        && (passwordRegsitroS.match(/(?=^.{6,}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*/))) {
+        console.log("Cumple las condiciones");
+
+
+        let email = document.getElementById("emailRegistroS").value;
+        console.log(email)
+        contadorM++;
+        localStorage.setItem(`user_${contadorM}`, JSON.stringify({
+            email: document.getElementById("emailRegistroS").value,
+            password: document.getElementById("paswwordRegistroS").value,
+            nombre: document.getElementById("nombreRegistroS").value,
+            dni: document.getElementById("DNIRegistroS").value,
+            telefono: document.getElementById("telefoRegistroS").value
+        }));
+
+        window.location.assign("../Login/login.html");
+
+    } else {
+        crearNodoS.appendChild(crearTextoS);
+        mensajeErrorS.appendChild(crearNodoS);
+    }
 }
+
 
 
 //comprueba si el usuario esta registrado, y luego nos crea en local storage una key (sesionLogin), para mostrar en el nav los datos del usuario (pagina login)
@@ -135,30 +200,26 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
 
         if ((busquedaHistorialM[contadorBusquedaUserM].user) == logeadoM) {
 
+
             var texto = (`Origen: ${busquedaHistorialM[contadorBusquedaUserM].origen}  
             Destino: ${busquedaHistorialM[contadorBusquedaUserM].destino} 
             Fecha ida: ${busquedaHistorialM[contadorBusquedaUserM].fechaIda}    
             Fecha vuelta: ${busquedaHistorialM[contadorBusquedaUserM].fechaVuelta}  
             Asientos: ${busquedaHistorialM[contadorBusquedaUserM].asientos} 
-            Precio: ${busquedaHistorialM[contadorBusquedaUserM].precio}`);
-            console.log(typeof texto)
+            Precio: ${busquedaHistorialM[contadorBusquedaUserM].precio} €`);
+
+
+            //console.log(texto)
             var etiqueta = document.createElement("p");
-
             var contenido = document.createTextNode(texto);
-
-
             etiqueta.appendChild(contenido);
             document.getElementById("cajaGraciasM").appendChild(etiqueta);
             var saltoLineaM = document.createElement("br");
             document.getElementById("cajaGraciasM").appendChild(saltoLineaM);
 
-
-
         }
         contadorBusquedaUserM++;
     }
-
-
 
 
     //console.log(busquedaHistorialM[1].user)  //para busca en todos los usuarios
@@ -172,6 +233,7 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
 function pagar() {
     const numTarjeta = document.getElementById('numeroTarjeta').value;
     const inputTarjeta = document.getElementById('numeroTarjeta');
+
 
     if (numTarjeta.match(/^[0-9]{16}$/)) {
         console.log("Tarjeta valida");
@@ -259,7 +321,14 @@ function colorear(boton) {
     }
     if (!encontrado) {
         asientos.push(`${boton.innerHTML}`)
-        boton.style.backgroundColor = "red";
+        boton.style.backgroundColor = "orange";
+    }
+
+    if (asientos.length > 10) {
+        asientos.splice(contLocStor, 1);
+        boton.style.backgroundColor = "#60e550";
+        contLocStor--;
+
     }
     console.log(asientos)
 }
@@ -269,7 +338,7 @@ let asientosComprobarM = document.getElementsByClassName("asiento")
 document.getElementById("ida").addEventListener("change", () => {
     function myFunction() {
         resetearColorAsientos();
-        
+
         asientosReservadosM = [];
         let fechaIda = document.getElementById("ida").value
         let fechaVuelta = document.getElementById("vuelta");
@@ -316,7 +385,7 @@ document.getElementById("ida").addEventListener("change", () => {
         //JSON.parse(localStorage.getItem(`${key}`)).password
         console.log(asientosReservadosM)
     }
-  
+
     myFunction();
     //console.log(asientosReservadosM)
 });
@@ -331,24 +400,26 @@ document.getElementById("vuelta").addEventListener("change", () => {
 //para recorrer en html los asientos
 //funcion para el html  <button onclick="comprobarAsientosM()">Comprobar AsientosS</button>
 function comprobarAsientosM() {
-    for (let m = 0; m < asientosComprobarM.length; m++) {
-        console.log(asientosComprobarM[m].innerHTML)
-        console.log(asientosComprobarM.length)
-        console.log(m)
+    for (let n = 0; n < asientosReservadosM.length; n++) {
+        //console.log(asientosReservadosM[n])
+        let contAsientos = 0;
+        let encontrado = false;
+
+        while ((contAsientos <= asientosComprobarM.length) && (!encontrado)) {
 
 
-
-
-
-        
-        for (let n = 0; n < asientosReservadosM.length; n++) {
-            console.log(asientosReservadosM[n])
-            if ((asientosComprobarM[m].innerHTML) == asientosReservadosM[n]) {
+            if ((asientosComprobarM[contAsientos].innerHTML) == asientosReservadosM[n]) {
                 console.log("Los asientos coinciden")
-                asientosComprobarM[m].style.backgroundColor = "red";
-                asientosComprobarM[m].setAttribute('onclick', '#')
+                asientosComprobarM[contAsientos].style.backgroundColor = "red";
+                asientosComprobarM[contAsientos].setAttribute('onclick', '#')
+                encontrado = true;
+
             }
+            contAsientos++;
+
         }
+
+
     }
 }
 
@@ -363,7 +434,7 @@ function resetearColorAsientos() {
         for (let n = 0; n < asientosReservadosM.length; n++) {
             console.log(asientosReservadosM[n])
             asientosComprobarM[m].setAttribute('onclick', 'colorear(this);')
-            asientosComprobarM[m].style.backgroundColor = "#60e550";    
+            asientosComprobarM[m].style.backgroundColor = "#60e550";
         }
     }
 }
