@@ -1,19 +1,51 @@
 window.onload = () => {
+
+    //si la key sesionLogin no existe, se ocultan elementos de nav
+    const sesionOnLoad = localStorage.getItem('sesionLogin');
+    if (!sesionOnLoad) {
+        console.log('sesionLogin no existe');
+        document.getElementById("nameD").style.display = "none";
+        document.getElementById("disconnectD").style.display = "none";
+        document.getElementById("connectD").style.display = "block"
+        document.getElementById("registerD").style.display = "block"
+        document.getElementById("contactD").style.display = "block"
+        document.getElementById("historialS").style.display = "none"
+    }
+
+
+
     var log = JSON.parse(localStorage.sesionLogin).login;
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
+    //console.log(log)
+
+
+
+
 
 
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
-        let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        let nombreUsuarioCompleto = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
+        let UsuarioLogeadoM = nombreUsuarioCompleto.nombre.split(' ')
+        console.log(UsuarioLogeadoM)
+        //let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
         document.getElementById("historialS").style.display = "block"
         document.getElementById("nameD").style.display = "block";
         document.getElementById("disconnectD").style.display = "block";
         document.getElementById("connectD").style.display = "none"
         document.getElementById("registerD").style.display = "none"
         document.getElementById("contactD").style.display = "none"
-        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
+        document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeadoM[0]}`
+
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        let fechaIdaMinM = document.getElementById("ida");
+        fechaIdaMinM.setAttribute("min", `${today}`);
+        //document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
@@ -28,14 +60,18 @@ window.onload = () => {
 
     }
 
+
+
     //En la pagina de pago, se van a rellenar los campor origen, destino...
     document.getElementById("origenReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).origen);
     document.getElementById("destinoReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).destino);
     document.getElementById("fechaIdaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaIda);
     document.getElementById("fechaVueltaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaVuelta);
+    document.getElementById("asientosReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).asientos);
     document.getElementById("precioReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).precio);
 
     setTimeout(historyM, 500);
+
 
 
 }
@@ -47,18 +83,49 @@ window.onload = () => {
 
 //Nos registra los usuarios en localstorage (pagina registro)
 let contadorM = 0;  //guardar contador en localstorage
+
 function guardarM() {
-    let email = document.getElementById("emailRegistroS").value;
-    console.log(email)
-    contadorM++;
-    localStorage.setItem(`user_${contadorM}`, JSON.stringify({
-        email: document.getElementById("emailRegistroS").value,
-        password: document.getElementById("paswwordRegistroS").value,
-        nombre: document.getElementById("nombreRegistroS").value,
-        dni: document.getElementById("DNIRegistroS").value,
-        telefono: document.getElementById("teleforegistroS").value
-    }));
+
+    const nombreRegistroNameS = document.getElementById('nombreRegistroS').value;
+    const DNIRegistroS = document.getElementById('DNIRegistroS').value;
+    const telefonoRegistroS = document.getElementById('telefoRegistroS').value;
+    const emailRegistroS = document.getElementById('emailRegistroS').value;
+    const passwordRegsitroS = document.getElementById('paswwordRegistroS').value;
+
+
+    const mensajeErrorS = document.getElementById('mensajeErrorS');
+    const crearNodoS = document.createElement('h3');
+    const crearTextoS = document.createTextNode('Datos incorrectos introducir de nuevo.');
+
+
+
+    if (nombreRegistroNameS.match(/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)$/)
+        && (DNIRegistroS.match(/^\d{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/))
+        && (telefonoRegistroS.match(/[0-9]{9}/))
+        && (emailRegistroS.match(/^[a-zA-Z0-9_\-\.~]{2,}@[a-zA-Z0-9_\-\.~]{2,}\.[a-zA-Z]{2,4}$/))
+        && (passwordRegsitroS.match(/(?=^.{6,}$)((?=.*\d)(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[^A-Za-z0-9])(?=.*[a-z])|(?=.*[^A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z])|(?=.*\d)(?=.*[A-Z])(?=.*[^A-Za-z0-9]))^.*/))) {
+        console.log("Cumple las condiciones");
+
+
+        let email = document.getElementById("emailRegistroS").value;
+        console.log(email)
+        contadorM++;
+        localStorage.setItem(`user_${contadorM}`, JSON.stringify({
+            email: document.getElementById("emailRegistroS").value,
+            password: document.getElementById("paswwordRegistroS").value,
+            nombre: document.getElementById("nombreRegistroS").value,
+            dni: document.getElementById("DNIRegistroS").value,
+            telefono: document.getElementById("telefoRegistroS").value
+        }));
+
+        window.location.assign("../Login/login.html");
+
+    } else {
+        crearNodoS.appendChild(crearTextoS);
+        mensajeErrorS.appendChild(crearNodoS);
+    }
 }
+
 
 
 //comprueba si el usuario esta registrado, y luego nos crea en local storage una key (sesionLogin), para mostrar en el nav los datos del usuario (pagina login)
@@ -67,6 +134,8 @@ function IniciarSesionM() {
     let passwordLoginM = document.getElementById("passwordLoginS").value;
 
     //console.log(emailLoginM)
+    const emailLoginE = document.getElementById("emailLoginS");
+    const passLoginE = document.getElementById("passwordLoginS");
 
     let encontradoM = false;
     let contadorWhileM = 0;
@@ -76,11 +145,11 @@ function IniciarSesionM() {
 
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
             if ((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM) {
+                passLoginE.style.borderColor = "blue";
                 console.log("contraseña ok")
                 localStorage.setItem('sesionLogin', JSON.stringify({
                     login: true,
                     user: `${key}`,
-
                 }))
 
 
@@ -102,12 +171,20 @@ function IniciarSesionM() {
             encontradoM = true;
             contadorWhileM = 0;
             console.log("Email encontrado")
+            emailLoginE.style.borderColor = "blue";
         }
         contadorWhileM++;
 
     }
 
     if (!encontradoM) {
+        emailLoginE.style.borderColor = "red";
+        passLoginE.style.borderColor = "red";
+        const mensajeErrorE = document.getElementById('mensajeError');
+        const crearNodoE = document.createElement('h3');
+        const crearTextoE = document.createTextNode('Usuario no registrado o credenciales no válidas');
+        crearNodoE.appendChild(crearTextoE);
+        mensajeErrorE.appendChild(crearNodoE);
         console.log("Usuario no registrado")
     }
 
@@ -134,30 +211,26 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
 
         if ((busquedaHistorialM[contadorBusquedaUserM].user) == logeadoM) {
 
+
             var texto = (`Origen: ${busquedaHistorialM[contadorBusquedaUserM].origen}  
             Destino: ${busquedaHistorialM[contadorBusquedaUserM].destino} 
             Fecha ida: ${busquedaHistorialM[contadorBusquedaUserM].fechaIda}    
             Fecha vuelta: ${busquedaHistorialM[contadorBusquedaUserM].fechaVuelta}  
             Asientos: ${busquedaHistorialM[contadorBusquedaUserM].asientos} 
-            Precio: ${busquedaHistorialM[contadorBusquedaUserM].precio}`);
-            console.log(typeof texto)
+            Precio: ${busquedaHistorialM[contadorBusquedaUserM].precio} €`);
+
+
+            //console.log(texto)
             var etiqueta = document.createElement("p");
-
             var contenido = document.createTextNode(texto);
-
-
             etiqueta.appendChild(contenido);
             document.getElementById("cajaGraciasM").appendChild(etiqueta);
             var saltoLineaM = document.createElement("br");
             document.getElementById("cajaGraciasM").appendChild(saltoLineaM);
 
-
-
         }
         contadorBusquedaUserM++;
     }
-
-
 
 
     //console.log(busquedaHistorialM[1].user)  //para busca en todos los usuarios
@@ -169,38 +242,57 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
 
 //En la pagina pago, hay que implementar un if para comprobar los datos de la tarjeta, si todo esta ok, se tienen que guardar los datos del key HistorialProvisionalM en la key Historial
 function pagar() {
+    const titularTarjeta = document.getElementById('titTarjeta').value;
     const numTarjeta = document.getElementById('numeroTarjeta').value;
-    const inputTarjeta = document.getElementById('numeroTarjeta');
-
-    if (numTarjeta.match(/^[0-9]{16}$/)) {
-        console.log("Tarjeta valida");
-        inputTarjeta.style.borderColor = "blue";
-    } else {
-        inputTarjeta.style.borderColor = "red";
-        console.log("Tarjeta no valida");
-    }
-
     const caducidadTarjeta = document.getElementById('cadTarjeta').value;
-    const inputCaducidad = document.getElementById('cadTarjeta');
-
-    if (caducidadTarjeta.match(/^[0-9]{2}-[0-9]{2}$/)) {
-        console.log("Caducidad valida");
-        inputCaducidad.style.borderColor = "blue";
-    } else {
-        inputCaducidad.style.borderColor = "red";
-        console.log("Caducidad no valida")
-    }
-
     const cvv = document.getElementById('cvv').value;
-    const inputCvv = document.getElementById('cvv');
 
-    if (cvv.match(/^[0-9]{3}$/)) {
-        console.log("CVV valido");
-        inputCvv.style.borderColor = "blue";
+
+
+    const mensajePago = document.getElementById('datosCredito');
+    const crearNodoPago = document.createElement('h3');
+    const crearTextoPagoError = document.createTextNode('Algunos datos son incorrectos');
+
+    if (
+        titularTarjeta.match(/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)$/)
+        &&
+        numTarjeta.match(/^[0-9]{16}$/)
+        &&
+        caducidadTarjeta.match(/^[0-9]{2}-[0-9]{2}$/)
+        &&
+        cvv.match(/^[0-9]{3}$/)
+    ) {
+        if (!localStorage.Historial) {
+            localStorage.setItem('Historial', JSON.stringify([{
+                user: "",
+                origen: "",
+                destino: "",
+                fechaIda: "",
+                fechaVuelta: "",
+                asientos: "",
+                precio: "",
+            }]));
+        }
+
+        //Si se cumplen las condiciones de pago, se actualiza el Historial
+        let historial = JSON.parse(localStorage.getItem(`Historial`))
+        let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
+        historial.push(historialNewM)
+        localStorage.setItem('Historial', JSON.stringify(historial));
+        window.location.assign("../Historial/historial.html");
+
+
     } else {
-        inputCvv.style.borderColor = "red";
-        console.log("CVV no valido")
+        crearNodoPago.appendChild(crearTextoPagoError);
+        mensajePago.appendChild(crearNodoPago);
+        location.reload();
     }
+
+
+
+
+
+
 
     //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
     /*  
@@ -214,30 +306,9 @@ function pagar() {
           precio: Number(80 * asientos.length),
       };*/
 
-    if (!localStorage.Historial) {
-        localStorage.setItem('Historial', JSON.stringify([{
-            user: "",
-            origen: "",
-            destino: "",
-            fechaIda: "",
-            fechaVuelta: "",
-            asientos: "",
-            precio: "",
-        }]));
-    }
-
-
-    //Si se cumplen las condiciones de pago, se actualiza el Historial
-    let historial = JSON.parse(localStorage.getItem(`Historial`))
-    let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
-    historial.push(historialNewM)
-    localStorage.setItem('Historial', JSON.stringify(historial));
-    //location.reload();
+   
 
 };
-
-
-
 
 
 //la utilizamos en la pagina compra a la hora de seleccionar los asientos, para guardar los asientos en local storage y ponerlos de color verde o rojo
@@ -258,7 +329,7 @@ function colorear(boton) {
     }
     if (!encontrado) {
         asientos.push(`${boton.innerHTML}`)
-        boton.style.backgroundColor = "red";
+        boton.style.backgroundColor = "orange";
     }
 
     if (asientos.length > 10) {
