@@ -3,6 +3,7 @@ window.onload = () => {
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
 
+    
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
         let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
@@ -261,8 +262,8 @@ function colorear(boton) {
         asientos.push(`${boton.innerHTML}`)
         boton.style.backgroundColor = "red";
     }
-    
-    if(asientos.length > 10){
+
+    if (asientos.length > 10) {
         asientos.splice(contLocStor, 1);
         boton.style.backgroundColor = "#60e550";
         contLocStor--;
@@ -351,10 +352,10 @@ function comprobarAsientosM() {
                 asientosComprobarM[contAsientos].style.backgroundColor = "red";
                 asientosComprobarM[contAsientos].setAttribute('onclick', '#')
                 encontrado = true;
-                
+
             }
             contAsientos++;
-            
+
         }
 
 
