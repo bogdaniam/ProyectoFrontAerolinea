@@ -3,7 +3,7 @@ window.onload = () => {
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
 
-    
+
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
         let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
@@ -65,6 +65,7 @@ function guardarM() {
 function IniciarSesionM() {
     let emailLoginM = document.getElementById("emailLoginS").value;
     let passwordLoginM = document.getElementById("passwordLoginS").value;
+
     //console.log(emailLoginM)
 
     let encontradoM = false;
@@ -82,24 +83,19 @@ function IniciarSesionM() {
 
                 }))
 
-                /*
-                setTimeout(function() {
 
-                    window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
-                }, 3.0*1000); 
-
-
-                //todavia no funciona
-                document.getElementsByClassName('contenedor-campos').style.display = 'none';
-                */
-
-                //borrar cuando funciona el codigo de arriba
-                window.location.assign("../Compra/compra.html");
+                document.getElementById("formularioM").style.display = "none"
+                document.getElementById("avisoPreloader").style.display = "inline"
+                                
+                //alert(test).value
+                //if (test.value === "true") {
+                  //  document.getElementsByClassName('formulario').style.display = "block"
+                //}
 
 
-
-
-
+                setTimeout(function () {
+                    window.location.assign("../Compra/compra.html")
+                }, 3.0 * 1000);
             } else {
                 console.log("contrasena invalida")
             }
@@ -108,13 +104,15 @@ function IniciarSesionM() {
             console.log("Email encontrado")
         }
         contadorWhileM++;
+
     }
 
     if (!encontradoM) {
         console.log("Usuario no registrado")
     }
-}
 
+
+}
 
 //nos borra el key sesionLogin, entonce vuelve a aparecer en el nav los botones por defecto 
 function desconectarD() {
@@ -378,6 +376,20 @@ function resetearColorAsientos() {
     }
 }
 
+function comprobarFormularioD() {
+    const nombre = document.getElementById("name")
+    const apellidos = document.getElementById("lastname")
+    const mail = document.getElementById("mail")
+    const tel = document.getElementById("tel")
+
+    if (nombre.value != "" && apellidos.value != "" && mail.value != "" && tel.value != "") {
+        window.location.assign("../Gracias/gracias.html")
+    } else {
+        alert('Tienes que rellenar todos los campos')
+        location.reload
+    }
+
+}
 
 
 
