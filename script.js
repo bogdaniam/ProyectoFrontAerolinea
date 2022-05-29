@@ -66,6 +66,8 @@ function IniciarSesionM() {
     let emailLoginM = document.getElementById("emailLoginS").value;
     let passwordLoginM = document.getElementById("passwordLoginS").value;
     //console.log(emailLoginM)
+    const emailLoginE = document.getElementById("emailLoginS");
+    const passLoginE = document.getElementById("passwordLoginS");
 
     let encontradoM = false;
     let contadorWhileM = 0;
@@ -75,11 +77,11 @@ function IniciarSesionM() {
 
         if ((JSON.parse(localStorage.getItem(`${key}`)).email) == emailLoginM) {
             if ((JSON.parse(localStorage.getItem(`${key}`)).password) == passwordLoginM) {
+                passLoginE.style.borderColor = "blue";
                 console.log("contraseña ok")
                 localStorage.setItem('sesionLogin', JSON.stringify({
                     login: true,
                     user: `${key}`,
-
                 }))
 
                 /*
@@ -97,20 +99,25 @@ function IniciarSesionM() {
                 window.location.assign("../Compra/compra.html");
 
 
-
-
-
             } else {
                 console.log("contrasena invalida")
             }
             encontradoM = true;
             contadorWhileM = 0;
             console.log("Email encontrado")
+            emailLoginE.style.borderColor = "blue";
         }
         contadorWhileM++;
     }
 
     if (!encontradoM) {
+        emailLoginE.style.borderColor = "red";
+        passLoginE.style.borderColor = "red";
+        const mensajeErrorE = document.getElementById('mensajeError');
+        const crearNodoE = document.createElement('h3');
+        const crearTextoE = document.createTextNode('Usuario no registrado o credenciales no válidas');
+        crearNodoE.appendChild(crearTextoE);
+        mensajeErrorE.appendChild(crearNodoE);
         console.log("Usuario no registrado")
     }
 }
