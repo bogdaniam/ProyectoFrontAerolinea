@@ -46,15 +46,16 @@
             <label>Email</label>
             <input id="emailLoginS" type="email" placeholder="Introduce tu email">
           </div>
+
           <div class="campo">
             <label>Contraseña</label>
-            <input id="passwordLoginS" type="password" placeholder="1Aa-Pepe">
+            <input id="passwordLoginS" type="password" placeholder="1Aa-Pepe" required
+              pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
+          </div>
         </div>
-
-            <div class="preloader"></div>
-            <div id="mensajeError" class="enviar">
-                <button onclick="IniciarSesionM();" class="boton">Log In</button>
-            </div>
+        <div class="enviar">
+          <button onclick="IniciarSesionM();" class="boton">Log In</button>
+        </div>
 
       </fieldset>    
       <div class="avisoTimeD" id="avisoPreloader" hidden>
