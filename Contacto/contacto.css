@@ -78,7 +78,7 @@ a:hover {
   margin-bottom: 2rem;
 }
 
-.contenedor {
+.form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto 20rem;
@@ -116,7 +116,7 @@ textarea {
   justify-content: space-evenly;
 }
 
-.boton {
+#enviar {
   background-color: rgb(236, 101, 44);
   font-family: 'Spartan', sans-serif;
   color: black;

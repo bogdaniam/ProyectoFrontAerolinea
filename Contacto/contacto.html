@@ -34,48 +34,53 @@
   </header>
 
   <main>
+<!--
+    <div class="enviar">
+      <button class="boton" onclick="guardarM();" type="submit" value="Enviar">Registrar</button>
+    </div>
 
-    <form class="formulario" id="form">
-      <fieldset>
+  </div>-->
+
+    <div class="formulario" id="form">
         <legend>Contáctame rellenando todos los campos</legend>
 
         <div class="contenedor">
-
+          <form action="" class="form">
           <div class="campo">
             <label>Nombre</label>
-            <input type="text" placeholder="Inserte su nombre aquí" required>
+            <input id="name" placeholder="Inserte su nombre aquí" required>
           </div>
 
           <div class="campo">
             <label>Apellidos</label>
-            <input type="text" placeholder="Inserte sus apellidos aquí" required>
+            <input id="lastname" placeholder="Inserte sus apellidos aquí" required>
           </div>
 
           <div class="campo">
             <label>Correo</label>
-            <input type="email" placeholder="Inserte su dirección de correo electrónico aquí" required>
+            <input id="mail"type="mail" placeholder="Inserte su dirección de correo electrónico aquí" required>
           </div>
 
           <div class="campo">
             <label>Teléfono</label>
-            <input type="tel" placeholder="Inserte su teléfono aquí" required>
+            <input id="tel" placeholder="Inserte su teléfono aquí" required>  
           </div>
 
           <div class="campo">
             <label>Mensaje</label>
             <textarea></textarea>
           </div>
-
+        </form>
         </div>
-        <div class="enviar">
+        <!-- <div class="enviar">
           <a href="../Gracias/gracias.html">
           <input type="button" class="boton" value="Enviar"></button>
           </a>
-        </div>
-        
-      </fieldset>
-
-    </form>
+        </div>       -->
+        <div class="enviar">
+          <input type="submit" id="enviar" onclick="comprobarFormularioD();" value="Enviar"></button>
+        </div>  
+    </div>
     
   </main>
   

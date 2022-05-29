@@ -45,7 +45,7 @@
 
         <div class="campo">
           <label>Nombre</label>
-          <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre">
+          <input id="nombreRegistroS" type="text" placeholder="Introduce tu Nombre y Apellidos ej. Sergio Conde Alcalde">
         </div>
 
         <div class="campo">
@@ -56,7 +56,7 @@
 
         <div class="campo">
           <label>Teléfono</label>
-          <input id="teleforegistroS" type="tel" placeholder="Introduce tu Número ej. +34-123456789" required
+          <input id="telefoRegistroS" type="tel" placeholder="Introduce tu Número ej. 681081123" required
             pattern="^+34-\d{9}$">
         </div>
       </div>
@@ -73,11 +73,11 @@
                     password must contain 1 lowercase letters
                     password must contain 1 non-alpha numeric number
                     password is 8-16 characters with no space -->
-        <input id="paswwordRegistroS" type="password" placeholder="1Aa-Pepe" required
+        <input id="paswwordRegistroS" type="password" placeholder="Aa1-sergio" required
           pattern="^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,16}$">
       </div>
 
-      <div class="enviar">
+      <div class="enviar" id="mensajeErrorS">
         <button class="boton" onclick="guardarM();" type="submit" value="Enviar">Registrar</button>
       </div>
 
