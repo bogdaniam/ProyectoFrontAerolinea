@@ -38,14 +38,7 @@ window.onload = () => {
         document.getElementById("contactD").style.display = "none"
         document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeadoM[0]}`
 
-        var today = new Date();
-        var dd = String(today.getDate()).padStart(2, '0');
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var yyyy = today.getFullYear();
-        today = yyyy + '-' + mm + '-' + dd;
-        let fechaIdaMinM = document.getElementById("ida");
-        fechaIdaMinM.setAttribute("min", `${today}`);
-        //document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeado.nombre}`
+        
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
@@ -343,6 +336,24 @@ function colorear(boton) {
 let asientosReservadosM = [];
 let asientosComprobarM = document.getElementsByClassName("asiento")
 //pagina compra, establece el atributo min de la fecha de vuelta, segun la fecha de ida
+
+
+document.getElementById("ida").addEventListener("click", () => {
+        function setDate () {
+    var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        let fechaIdaMinM = document.getElementById("ida");
+        fechaIdaMinM.setAttribute("min", `${today}`);
+        }
+        setDate()
+    });
+
+
+
+
 document.getElementById("ida").addEventListener("change", () => {
     function myFunction() {
         resetearColorAsientos();
