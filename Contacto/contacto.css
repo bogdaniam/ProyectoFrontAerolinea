@@ -7,6 +7,8 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  font-family: 'Orbitron', sans-serif;
+
 }
 
 body {
@@ -15,11 +17,15 @@ body {
 
 header {
   display: flex;
-  background-color: #93c47d;
+  background-color:  #60e550;
   height: 6rem;
   justify-content: flex-end;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
+  border-radius: 0.5rem;
+  border: solid 3px black;
+
+
 }
 
 .navegacion {
@@ -28,6 +34,8 @@ header {
   justify-content: space-evenly;
   align-items: center;
   width: 50rem;
+  border-radius: 0.5rem;
+
 }
 
 a {
@@ -39,7 +47,6 @@ a {
 
 a:hover {
   color: white;
-  text-decoration: underline;
 }
 
 #logo {
@@ -49,12 +56,16 @@ a:hover {
 }
 /*Formulario*/
 .formulario {
-  background-color: #93c47d;
+  background-color:  #60e550;
   width: min(60rem, 100%);
   margin: 0 auto;
   margin-top: 5rem;
   padding: 2rem;
   border-radius: 1rem;
+  box-shadow: 0px 0px 35px 5px rgba(255, 87, 0, 0.64);
+  border: solid 3px black;
+
+
 }
 
 .formulario fieldset {
@@ -67,7 +78,7 @@ a:hover {
   margin-bottom: 2rem;
 }
 
-.contenedor {
+.form {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto 20rem;
@@ -105,7 +116,7 @@ textarea {
   justify-content: space-evenly;
 }
 
-.boton {
+#enviar {
   background-color: rgb(236, 101, 44);
   font-family: 'Spartan', sans-serif;
   color: black;
@@ -118,6 +129,7 @@ textarea {
   text-align: center;
   margin-top: 4.5rem;
   cursor: pointer;
+  border: solid 3px black;
 }
 
 /*
@@ -130,8 +142,8 @@ Formulario
 
 .footer-distributed {
   display: flex;
-  margin-top: 10rem;
-  background-color: #93c47d;
+  margin-top: 15rem;
+  background-color:  #60e550;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
@@ -141,6 +153,10 @@ Formulario
   z-index: 0;
   align-items: center;
   justify-content: center;
+  border-radius: 0.5rem;
+  border: solid 3px black;
+
+
 }
 
 
