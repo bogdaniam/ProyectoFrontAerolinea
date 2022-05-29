@@ -90,7 +90,19 @@ header {
   border: .2em solid black;
 }
 
+/* .avisoTimeD {
+  width: min(60rem, 100%);
+  margin: 0 auto;
+  margin-top: 5rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 35px 5px rgba(255, 87, 0, 0.64);
+  border: solid 3px black; 
+} 
+*/
+
 .preloader {
+  margin-left: 40%;
   width: 70px;
   height: 70px;
   border: 10px solid #eee;
@@ -169,7 +181,6 @@ a:hover {
     justify-content: center;
     border-radius: 0.5rem;
     border: solid 3px black;
-
   }
 
   
