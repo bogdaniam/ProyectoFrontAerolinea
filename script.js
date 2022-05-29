@@ -1,8 +1,9 @@
 window.onload = () => {
     var log = JSON.parse(localStorage.sesionLogin).login;
     //console.log(JSON.parse(localStorage.sesionLogin).user)
+    setTimeout(historyM, 200);
 
-
+    
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
         let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
@@ -34,6 +35,7 @@ window.onload = () => {
     document.getElementById("fechaVueltaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaVuelta);
     document.getElementById("precioReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).precio);
 
+    setTimeout(historyM, 500);
 
 
 }
@@ -92,7 +94,7 @@ function IniciarSesionM() {
                 */
 
                 //borrar cuando funciona el codigo de arriba
-                window.location.assign("http://127.0.0.1:5500/Compra/compra.html");
+                window.location.assign("../Compra/compra.html");
 
 
 
@@ -203,16 +205,16 @@ function pagar() {
     }
 
     //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
-  /*  
-    let historialNewM = {
-        user: JSON.parse(localStorage.sesionLogin).user,
-        origen: document.getElementById("salida").value,
-        destino: document.getElementById("destino").value,
-        fechaIda: document.getElementById("ida").value,
-        fechaVuelta: document.getElementById("vuelta").value,
-        asientos: asientos,
-        precio: Number(80 * asientos.length),
-    };*/
+    /*  
+      let historialNewM = {
+          user: JSON.parse(localStorage.sesionLogin).user,
+          origen: document.getElementById("salida").value,
+          destino: document.getElementById("destino").value,
+          fechaIda: document.getElementById("ida").value,
+          fechaVuelta: document.getElementById("vuelta").value,
+          asientos: asientos,
+          precio: Number(80 * asientos.length),
+      };*/
 
     if (!localStorage.Historial) {
         localStorage.setItem('Historial', JSON.stringify([{
@@ -229,11 +231,11 @@ function pagar() {
 
     //Si se cumplen las condiciones de pago, se actualiza el Historial
     let historial = JSON.parse(localStorage.getItem(`Historial`))
-    let historialNewM  = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
+    let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
     historial.push(historialNewM)
     localStorage.setItem('Historial', JSON.stringify(historial));
     //location.reload();
-    
+
 };
 
 
@@ -251,7 +253,7 @@ function colorear(boton) {
 
         if ((asientos[contLocStor] == (`${boton.innerHTML}`))) {
             asientos.splice(contLocStor, 1);
-            boton.style.backgroundColor = "green"
+            boton.style.backgroundColor = "#60e550"
             encontrado = true;
         }
         contLocStor++;
@@ -260,21 +262,123 @@ function colorear(boton) {
         asientos.push(`${boton.innerHTML}`)
         boton.style.backgroundColor = "red";
     }
+
+    if (asientos.length > 10) {
+        asientos.splice(contLocStor, 1);
+        boton.style.backgroundColor = "#60e550";
+        contLocStor--;
+
+    }
     console.log(asientos)
 }
-
+let asientosReservadosM = [];
+let asientosComprobarM = document.getElementsByClassName("asiento")
 //pagina compra, establece el atributo min de la fecha de vuelta, segun la fecha de ida
 document.getElementById("ida").addEventListener("change", () => {
     function myFunction() {
+        resetearColorAsientos();
+
+        asientosReservadosM = [];
         let fechaIda = document.getElementById("ida").value
         let fechaVuelta = document.getElementById("vuelta");
         fechaVuelta.setAttribute("min", `${fechaIda}`);
+        //console.log(`${localStorage.Historial}`)
 
+
+        //JSON.parse(localStorage.Historial).fechaIda
+        let key = localStorage.Historial
+        //console.log(JSON.parse(localStorage.Historial)[1].fechaIda)
+        let destinoM = document.getElementById("destino").value;
+        //console.log(destinoM)
+
+
+
+        //para recorrer el Historial
+        for (let i = 0; i < key.length; i++) {
+
+            let fechaComprobacion = JSON.parse(localStorage.Historial)[i].fechaIda
+
+            let destinoComprobacion = JSON.parse(localStorage.Historial)[i].destino
+            //let key = localStorage.Historial;
+
+
+            //si la fecha seleccionada y el destino coinciden
+            if ((fechaIda == fechaComprobacion) && (destinoM == destinoComprobacion)) {
+                //console.log("Las fechas de ida y destino coinciden")
+                //console.log(JSON.parse(localStorage.Historial)[i].asientos)
+                //asientosReservadosM.push(JSON.parse(localStorage.Historial)[i].asientos)
+
+
+                for (let j = 0; j < (JSON.parse(localStorage.Historial)[i].asientos).length; j++) {
+                    asientosReservadosM.push(JSON.parse(localStorage.Historial)[i].asientos[j])
+
+                }
+                //console.log(asientosReservadosM)
+                //console.log(asientosComprobarM)
+            }
+            console.log(asientosReservadosM)
+        }
+
+
+
+        //JSON.parse(localStorage.getItem(`${key}`)).password
+        console.log(asientosReservadosM)
+    }
+
+    myFunction();
+    //console.log(asientosReservadosM)
+});
+
+//let asientosComprobarM = document.getElementsByClassName("asiento")
+
+document.getElementById("vuelta").addEventListener("change", () => {
+    comprobarAsientosM()
+});
+
+
+//para recorrer en html los asientos
+//funcion para el html  <button onclick="comprobarAsientosM()">Comprobar AsientosS</button>
+function comprobarAsientosM() {
+    for (let n = 0; n < asientosReservadosM.length; n++) {
+        //console.log(asientosReservadosM[n])
+        let contAsientos = 0;
+        let encontrado = false;
+
+        while ((contAsientos <= asientosComprobarM.length) && (!encontrado)) {
+
+
+            if ((asientosComprobarM[contAsientos].innerHTML) == asientosReservadosM[n]) {
+                console.log("Los asientos coinciden")
+                asientosComprobarM[contAsientos].style.backgroundColor = "red";
+                asientosComprobarM[contAsientos].setAttribute('onclick', '#')
+                encontrado = true;
+
+            }
+            contAsientos++;
+
+        }
 
 
     }
-    myFunction();
-});
+}
+
+
+
+//para resetear los botones si el usuario cambia de fecha
+function resetearColorAsientos() {
+    for (let m = 0; m < asientosComprobarM.length; m++) {
+        console.log(asientosComprobarM[m].innerHTML)
+        console.log(asientosComprobarM.length)
+        console.log(m)
+        for (let n = 0; n < asientosReservadosM.length; n++) {
+            console.log(asientosReservadosM[n])
+            asientosComprobarM[m].setAttribute('onclick', 'colorear(this);')
+            asientosComprobarM[m].style.backgroundColor = "#60e550";
+        }
+    }
+}
+
+
 
 
 
