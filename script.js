@@ -3,7 +3,7 @@ window.onload = () => {
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
 
-    
+
     //Cambia los elementos del NAV, dependiendo si el usuario esta logeado o no
     if (log) {
         let UsuarioLogeado = (JSON.parse(localStorage[`${JSON.parse(localStorage.sesionLogin).user}`]))
@@ -33,6 +33,7 @@ window.onload = () => {
     document.getElementById("destinoReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).destino);
     document.getElementById("fechaIdaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaIda);
     document.getElementById("fechaVueltaReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).fechaVuelta);
+    document.getElementById("asientosReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).asientos);
     document.getElementById("precioReserva").innerHTML = (JSON.parse(localStorage.HistorialProvisionalM).precio);
 
     setTimeout(historyM, 500);
@@ -178,38 +179,56 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
 
 //En la pagina pago, hay que implementar un if para comprobar los datos de la tarjeta, si todo esta ok, se tienen que guardar los datos del key HistorialProvisionalM en la key Historial
 function pagar() {
+    const titularTarjeta = document.getElementById('titTarjeta').value;
     const numTarjeta = document.getElementById('numeroTarjeta').value;
-    const inputTarjeta = document.getElementById('numeroTarjeta');
-
-    if (numTarjeta.match(/^[0-9]{16}$/)) {
-        console.log("Tarjeta valida");
-        inputTarjeta.style.borderColor = "blue";
-    } else {
-        inputTarjeta.style.borderColor = "red";
-        console.log("Tarjeta no valida");
-    }
-
     const caducidadTarjeta = document.getElementById('cadTarjeta').value;
-    const inputCaducidad = document.getElementById('cadTarjeta');
-
-    if (caducidadTarjeta.match(/^[0-9]{2}-[0-9]{2}$/)) {
-        console.log("Caducidad valida");
-        inputCaducidad.style.borderColor = "blue";
-    } else {
-        inputCaducidad.style.borderColor = "red";
-        console.log("Caducidad no valida")
-    }
-
     const cvv = document.getElementById('cvv').value;
-    const inputCvv = document.getElementById('cvv');
 
-    if (cvv.match(/^[0-9]{3}$/)) {
-        console.log("CVV valido");
-        inputCvv.style.borderColor = "blue";
+
+    const mensajePago = document.getElementById('datosCredito');
+    const crearNodoPago = document.createElement('h3');
+    const crearTextoPagoError = document.createTextNode('Algunos datos son incorrectos');
+
+    if (
+        titularTarjeta.match(/^([a-zA-Z]{2,}\s[a-zA-z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)$/)
+        &&
+        numTarjeta.match(/^[0-9]{16}$/)
+        &&
+        caducidadTarjeta.match(/^[0-9]{2}-[0-9]{2}$/)
+        &&
+        cvv.match(/^[0-9]{3}$/)
+    ) {
+        if (!localStorage.Historial) {
+            localStorage.setItem('Historial', JSON.stringify([{
+                user: "",
+                origen: "",
+                destino: "",
+                fechaIda: "",
+                fechaVuelta: "",
+                asientos: "",
+                precio: "",
+            }]));
+        }
+
+        //Si se cumplen las condiciones de pago, se actualiza el Historial
+        let historial = JSON.parse(localStorage.getItem(`Historial`))
+        let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
+        historial.push(historialNewM)
+        localStorage.setItem('Historial', JSON.stringify(historial));
+        window.location.assign("../Historial/historial.html");
+
+
     } else {
-        inputCvv.style.borderColor = "red";
-        console.log("CVV no valido")
+        crearNodoPago.appendChild(crearTextoPagoError);
+        mensajePago.appendChild(crearNodoPago);
+        location.reload();
     }
+
+
+
+
+
+
 
     //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
     /*  
@@ -223,30 +242,9 @@ function pagar() {
           precio: Number(80 * asientos.length),
       };*/
 
-    if (!localStorage.Historial) {
-        localStorage.setItem('Historial', JSON.stringify([{
-            user: "",
-            origen: "",
-            destino: "",
-            fechaIda: "",
-            fechaVuelta: "",
-            asientos: "",
-            precio: "",
-        }]));
-    }
-
-
-    //Si se cumplen las condiciones de pago, se actualiza el Historial
-    let historial = JSON.parse(localStorage.getItem(`Historial`))
-    let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
-    historial.push(historialNewM)
-    localStorage.setItem('Historial', JSON.stringify(historial));
-    //location.reload();
+   
 
 };
-
-
-
 
 
 //la utilizamos en la pagina compra a la hora de seleccionar los asientos, para guardar los asientos en local storage y ponerlos de color verde o rojo
