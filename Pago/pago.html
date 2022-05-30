@@ -33,19 +33,20 @@
     </header>
 
     <main>
+        <div id="ocultar">
         <div class="resumen">
             <h2>Resumen de su reserva</h2>
         </div>
 
-        <div class="datosReserva">
+        <div class="datosReserva" id="pago1">
             <h3>Origen: <span id="origenReserva"></span></h3>
-            <h3>Destino:    <span id="destinoReserva"></span></h3>
-            <h3>Fecha de Ida    :<span id="fechaIdaReserva"></span></h3>
-            <h3>Fecha de vuelta:    <span id="fechaVueltaReserva"></span></h3>
-            <h3>Asientos:  <span id="asientosReserva"></span></h3>
-            <h3>Precio Total:   <span id="precioReserva"></span></h3>
+            <h3>Destino: <span id="destinoReserva"></span></h3>
+            <h3>Fecha de Ida :<span id="fechaIdaReserva"></span></h3>
+            <h3>Fecha de vuelta: <span id="fechaVueltaReserva"></span></h3>
+            <h3>Asientos: <span id="asientosReserva"></span></h3>
+            <h3>Precio Total: <span id="precioReserva"></span>€</h3>
         </div>
-
+        </div>
         <div class="contenedor-tarjeta">
             <div class="datosTarjeta" id="datosCredito">
                 <div class="titularTarjeta">
@@ -73,7 +74,13 @@
                 </div>
 
             </div>
+            <div class="avisoTimeD" id="avisoPreloader" hidden>
+                <p>Comprobando datos de pago con su identidad bancaria</p>
+                <br>
+                <div class="preloader"></div>
+            </div>
         </div>
+
 
     </main>
 
@@ -98,13 +105,14 @@
         <div class="footer-right">
             <p class="footer-company-about">
                 <span>About the company :</span>
-                Lorem ipsum dolor sit amet, consectateur adispicing
+               Primera compañia aerea Eco Friendly
             </p>
         </div>
     </footer>
 
     <script src="../script.js"></script>
-    
+
 
 </body>
+
 </html>
