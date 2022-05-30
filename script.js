@@ -14,6 +14,7 @@ window.onload = () => {
 
 
 
+
     var log = JSON.parse(localStorage.sesionLogin).login;
     //console.log(JSON.parse(localStorage.sesionLogin).user)
     setTimeout(historyM, 200);
@@ -38,7 +39,7 @@ window.onload = () => {
         document.getElementById("contactD").style.display = "none"
         document.getElementById('nameD').innerHTML = `Bienvenido ${UsuarioLogeadoM[0]}`
 
-        
+
     } else {
         document.getElementById("nameD").style.display = "none";
         document.getElementById("disconnectD").style.display = "none";
@@ -75,9 +76,17 @@ window.onload = () => {
 
 
 //Nos registra los usuarios en localstorage (pagina registro)
-let contadorM = 0;  //guardar contador en localstorage
+const contadorUsuarios = localStorage.getItem('contadorUsuarios');
+if (!contadorUsuarios) {
+    localStorage.setItem("contadorUsuarios", JSON.stringify(
+        0))
+}
+
+
 
 function guardarM() {
+
+    
 
     const nombreRegistroNameS = document.getElementById('nombreRegistroS').value;
     const DNIRegistroS = document.getElementById('DNIRegistroS').value;
@@ -102,8 +111,15 @@ function guardarM() {
 
         let email = document.getElementById("emailRegistroS").value;
         console.log(email)
-        contadorM++;
-        localStorage.setItem(`user_${contadorM}`, JSON.stringify({
+
+     
+        let cantNum = Number(JSON.parse(localStorage.getItem(`contadorUsuarios`)))
+        cantNum++;
+        localStorage.setItem("contadorUsuarios", JSON.stringify(
+            Number(cantNum)))
+
+
+        localStorage.setItem(`user_${cantNum}`, JSON.stringify({
             email: document.getElementById("emailRegistroS").value,
             password: document.getElementById("paswwordRegistroS").value,
             nombre: document.getElementById("nombreRegistroS").value,
@@ -126,7 +142,6 @@ function IniciarSesionM() {
     let emailLoginM = document.getElementById("emailLoginS").value;
     let passwordLoginM = document.getElementById("passwordLoginS").value;
 
-    //console.log(emailLoginM)
     const emailLoginE = document.getElementById("emailLoginS");
     const passLoginE = document.getElementById("passwordLoginS");
 
@@ -148,11 +163,7 @@ function IniciarSesionM() {
 
                 document.getElementById("formularioM").style.display = "none"
                 document.getElementById("avisoPreloader").style.display = "inline"
-                                
-                //alert(test).value
-                //if (test.value === "true") {
-                  //  document.getElementsByClassName('formulario').style.display = "block"
-                //}
+
 
 
                 setTimeout(function () {
@@ -224,11 +235,6 @@ function historyM() {    //de momento funciona cuando se pulsa el boton
         }
         contadorBusquedaUserM++;
     }
-
-
-    //console.log(busquedaHistorialM[1].user)  //para busca en todos los usuarios
-    //console.log(busquedaHistorialM)   //para ver todos los historiales
-
 }
 
 
@@ -272,7 +278,18 @@ function pagar() {
         let historialNewM = JSON.parse(localStorage.getItem(`HistorialProvisionalM`))
         historial.push(historialNewM)
         localStorage.setItem('Historial', JSON.stringify(historial));
-        window.location.assign("../Historial/historial.html");
+        
+
+        document.getElementById("ocultar").style.display = "none"
+        document.getElementById("datosCredito").style.display = "none"
+        document.getElementById("avisoPreloader").style.display = "inline"
+
+
+
+                setTimeout(function () {
+                    window.location.assign("../Historial/historial.html");
+                }, 5.0 * 1000);
+
 
 
     } else {
@@ -280,26 +297,6 @@ function pagar() {
         mensajePago.appendChild(crearNodoPago);
         location.reload();
     }
-
-
-
-
-
-
-
-    //Para guardar en el historial, hay que implementar el codigo en la pagina de pago, si los datos de la tarjetas son validos
-    /*  
-      let historialNewM = {
-          user: JSON.parse(localStorage.sesionLogin).user,
-          origen: document.getElementById("salida").value,
-          destino: document.getElementById("destino").value,
-          fechaIda: document.getElementById("ida").value,
-          fechaVuelta: document.getElementById("vuelta").value,
-          asientos: asientos,
-          precio: Number(80 * asientos.length),
-      };*/
-
-   
 
 };
 
@@ -331,7 +328,7 @@ function colorear(boton) {
         contLocStor--;
 
     }
-    console.log(asientos)
+    
 }
 let asientosReservadosM = [];
 let asientosComprobarM = document.getElementsByClassName("asiento")
@@ -339,17 +336,17 @@ let asientosComprobarM = document.getElementsByClassName("asiento")
 
 
 document.getElementById("ida").addEventListener("click", () => {
-        function setDate () {
-    var today = new Date();
+    function setDate() {
+        var today = new Date();
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var yyyy = today.getFullYear();
         today = yyyy + '-' + mm + '-' + dd;
         let fechaIdaMinM = document.getElementById("ida");
         fechaIdaMinM.setAttribute("min", `${today}`);
-        }
-        setDate()
-    });
+    }
+    setDate()
+});
 
 
 
@@ -362,54 +359,44 @@ document.getElementById("ida").addEventListener("change", () => {
         let fechaIda = document.getElementById("ida").value
         let fechaVuelta = document.getElementById("vuelta");
         fechaVuelta.setAttribute("min", `${fechaIda}`);
-        //console.log(`${localStorage.Historial}`)
-
-
-        //JSON.parse(localStorage.Historial).fechaIda
+        
         let key = localStorage.Historial
-        //console.log(JSON.parse(localStorage.Historial)[1].fechaIda)
         let destinoM = document.getElementById("destino").value;
-        //console.log(destinoM)
-
 
 
         //para recorrer el Historial
         for (let i = 0; i < key.length; i++) {
 
             let fechaComprobacion = JSON.parse(localStorage.Historial)[i].fechaIda
-
             let destinoComprobacion = JSON.parse(localStorage.Historial)[i].destino
-            //let key = localStorage.Historial;
+
 
 
             //si la fecha seleccionada y el destino coinciden
             if ((fechaIda == fechaComprobacion) && (destinoM == destinoComprobacion)) {
-                //console.log("Las fechas de ida y destino coinciden")
-                //console.log(JSON.parse(localStorage.Historial)[i].asientos)
-                //asientosReservadosM.push(JSON.parse(localStorage.Historial)[i].asientos)
+                
 
 
                 for (let j = 0; j < (JSON.parse(localStorage.Historial)[i].asientos).length; j++) {
                     asientosReservadosM.push(JSON.parse(localStorage.Historial)[i].asientos[j])
 
                 }
-                //console.log(asientosReservadosM)
-                //console.log(asientosComprobarM)
+             
             }
             console.log(asientosReservadosM)
         }
 
 
 
-        //JSON.parse(localStorage.getItem(`${key}`)).password
+       
         console.log(asientosReservadosM)
     }
 
     myFunction();
-    //console.log(asientosReservadosM)
+
 });
 
-//let asientosComprobarM = document.getElementsByClassName("asiento")
+
 
 document.getElementById("vuelta").addEventListener("change", () => {
     comprobarAsientosM()
@@ -417,10 +404,9 @@ document.getElementById("vuelta").addEventListener("change", () => {
 
 
 //para recorrer en html los asientos
-//funcion para el html  <button onclick="comprobarAsientosM()">Comprobar AsientosS</button>
+
 function comprobarAsientosM() {
     for (let n = 0; n < asientosReservadosM.length; n++) {
-        //console.log(asientosReservadosM[n])
         let contAsientos = 0;
         let encontrado = false;
 
@@ -435,10 +421,7 @@ function comprobarAsientosM() {
 
             }
             contAsientos++;
-
         }
-
-
     }
 }
 
@@ -480,32 +463,12 @@ function comprobarFormularioD() {
 function compra() {
     let salida = document.getElementById("salida").value
     let destino = document.getElementById("destino").value
-    //console.log(salida)
-    //console.log(destino)
     let ida = document.getElementById("ida").value
     let vuelta = document.getElementById("vuelta").value
-    //console.log(ida)
-    //console.log(vuelta)
-
-
-    /*    no hacerle caso a este codigo de momento
-        localStorage.setItem('Historial', JSON.stringify([{
-            user: JSON.parse(localStorage.sesionLogin).user,
-            origen: document.getElementById("salida").value,
-            destino: document.getElementById("destino").value,
-            fechaIda: document.getElementById("ida").value,
-            fechaVuelta: document.getElementById("vuelta").value,
-            asientos: asientos,
-            precio: 100,
-        }]));
-    */
 
 
 
 
-
-
-    //Implementar solo en la pagina de compra
     //Guardar los datos en una key provisional, para que luego la pagina de pago tenga acceso a estos datos
 
     let historialProvisionalM = {
@@ -520,6 +483,6 @@ function compra() {
     localStorage.setItem('HistorialProvisionalM', JSON.stringify(historialProvisionalM));
     location.reload();
     window.location.assign("../Pago/pago.html")
-    //http://127.0.0.1:5500/Pago/pago.html
+
 
 }
